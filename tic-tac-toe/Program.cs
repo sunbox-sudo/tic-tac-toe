@@ -11,13 +11,14 @@ namespace tic_tac_toe
             Debug.WriteLine("Tic Tac Toe Game Started");
             Setup_Board(Board);
             Print_Board(Board);
+            Console.ReadLine();
         }
 
         #region Game 
         static void Setup_Board(char[,] Board) 
         {
-            for (int i = 0; i < Board.Length; i++) 
-            {
+            for (int i = 0; i < Board.GetLength(0); i++) 
+            { 
                 for (int j = 0; j < Board.GetLength(1); j++) 
                 {
                     Board[i, j] = '#';
@@ -32,7 +33,7 @@ namespace tic_tac_toe
 
         static void Print_Board(char[,] Board) 
         { 
-            for (int i = 0; i < Board.Length; i++) 
+            for (int i = 0; i < Board.GetLength(0); i++) 
             {
                 for (int j = 0; j < Board.GetLength(1); j++) 
                 {
