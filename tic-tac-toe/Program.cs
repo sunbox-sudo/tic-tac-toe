@@ -8,17 +8,31 @@ namespace tic_tac_toe
         static int Player_Cords_x = 0;
         static int Player_Cords_y = 0;
         static char Player_Team = 'x';
-        
+        static int Menu_Main_Position = 0;
+        static string[] Menu_Main_Options =
+            {
+                "Play",
+                "Setting",
+                "Quit"
+            };
+
 
         public static bool Debug_Mode = false;
 
-        static void Main(string[] args)
+        static void Main()
         {
             Console.WriteLine("Tic Tac Toe Game Started");
             Thread.Sleep(1000);
             Console.Clear();
+        }
+
+        #region Game 
+
+        static void play()
+        {
             Setup_Board(Board);
             Print_Board(Board);
+
             while (true)
             {
                 Select_cell();
@@ -27,7 +41,7 @@ namespace tic_tac_toe
             }
         }
 
-        #region Game 
+
         static void Setup_Board(char[,] Board) 
         {
             for (int i = 0; i < Board.GetLength(0); i++) 
@@ -42,7 +56,7 @@ namespace tic_tac_toe
 
         static void Check_Win() 
         {
-
+            
         }
 
         static void Switch_Player() 
@@ -114,6 +128,18 @@ namespace tic_tac_toe
             // Select
 
             if (input == ConsoleKey.Enter) Place_Marker(Player_Cords_x, Player_Cords_y, Player_Team);
+        }
+
+        static void menu() 
+        {
+            // Menu buttons
+            ConsoleKey input = Console.ReadKey().Key;
+            if (input == ConsoleKey.UpArrow) Menu_Main_Position++;
+            if (input == ConsoleKey.DownArrow) Menu_Main_Position--;
+
+            // Boundaries
+            if (Menu_Main_Position < 0) Menu_Main_Position = (Board.GetLength(0) - 1);
+            if (Menu_Main_Position > Board.GetLength(0) - 1) Menu_Main_Position = 0;
         }
 
         #endregion
