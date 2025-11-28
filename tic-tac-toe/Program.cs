@@ -46,9 +46,13 @@ namespace tic_tac_toe
 
         }
 
-        static void Place_Marker() 
+        static void Place_Marker(int x, int y, char team) 
         {
-
+            if (Board[x, y] == '#')
+            {
+                Board[x, y] = team;
+                Switch_Player();
+            }
         }
 
         #endregion
@@ -78,11 +82,22 @@ namespace tic_tac_toe
 
         static void Select_cell()
         {
+            // Get Input
             ConsoleKey input = Console.ReadKey().Key;
             if (input == ConsoleKey.UpArrow) Player_Cords_y--;
             if (input == ConsoleKey.DownArrow) Player_Cords_y++;
             if (input == ConsoleKey.LeftArrow) Player_Cords_x--;
             if (input == ConsoleKey.RightArrow) Player_Cords_x++;
+
+            // Boundaries
+            if (Player_Cords_y < 0) Player_Cords_y = (Board.GetLength(0) -1);
+            if (Player_Cords_y > Board.GetLength(0) -1 ) Player_Cords_y = 0;
+            if (Player_Cords_x < 0) Player_Cords_x = Board.GetLength(1) -1 ;
+            if (Player_Cords_x > Board.GetLength(1) - 1) Player_Cords_x = 0;
+
+            // Select
+
+            if (input == ConsoleKey.Enter) Place_Marker(Player_Cords_x, Player_Cords_y, 'x');
         }
 
         #endregion
