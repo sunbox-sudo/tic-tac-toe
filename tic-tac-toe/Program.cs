@@ -4,14 +4,23 @@ namespace tic_tac_toe
 {
     internal class Program
     {
-         static char[,] Board = new char[3, 3];
+        static char[,] Board = new char[3, 3];
+        static int Player_Cords_x = 0;
+        static int Player_Cords_y = 0;
 
         static void Main(string[] args)
         {
-            Debug.WriteLine("Tic Tac Toe Game Started");
+            Console.WriteLine("Tic Tac Toe Game Started");
+            Thread.Sleep(1000);
+            Console.Clear();
             Setup_Board(Board);
             Print_Board(Board);
-            Console.ReadLine();
+            while (true)
+            {
+                Select_cell();
+                Console.Clear();
+                Print_Board(Board);
+            }
         }
 
         #region Game 
@@ -26,6 +35,22 @@ namespace tic_tac_toe
             }
         }
 
+
+        static void Check_Win() 
+        {
+
+        }
+
+        static void Switch_Player() 
+        {
+
+        }
+
+        static void Place_Marker() 
+        {
+
+        }
+
         #endregion
 
 
@@ -37,10 +62,27 @@ namespace tic_tac_toe
             {
                 for (int j = 0; j < Board.GetLength(1); j++) 
                 {
-                    Console.Write(Board[i, j] + " ");
+                    if (i == Player_Cords_y && j == Player_Cords_x)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(Board[i, j] + " ");
+                        Console.ResetColor();
+                    }
+                    else
+
+                        Console.Write(Board[i, j] + " ");
                 }
                 Console.WriteLine();
             }
+        }
+
+        static void Select_cell()
+        {
+            ConsoleKey input = Console.ReadKey().Key;
+            if (input == ConsoleKey.UpArrow) Player_Cords_y--;
+            if (input == ConsoleKey.DownArrow) Player_Cords_y++;
+            if (input == ConsoleKey.LeftArrow) Player_Cords_x--;
+            if (input == ConsoleKey.RightArrow) Player_Cords_x++;
         }
 
         #endregion
