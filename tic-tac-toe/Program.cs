@@ -7,6 +7,10 @@ namespace tic_tac_toe
         static char[,] Board = new char[3, 3];
         static int Player_Cords_x = 0;
         static int Player_Cords_y = 0;
+        static char Player_Team = 'x';
+        
+
+        public static bool Debug_Mode = true;
 
         static void Main(string[] args)
         {
@@ -43,14 +47,14 @@ namespace tic_tac_toe
 
         static void Switch_Player() 
         {
-
+            
         }
 
         static void Place_Marker(int x, int y, char team) 
         {
-            if (Board[x, y] == '#')
+            if (Board[y, x] == '#')
             {
-                Board[x, y] = team;
+                Board[y, x] = team;
                 Switch_Player();
             }
         }
@@ -95,9 +99,17 @@ namespace tic_tac_toe
             if (Player_Cords_x < 0) Player_Cords_x = Board.GetLength(1) -1 ;
             if (Player_Cords_x > Board.GetLength(1) - 1) Player_Cords_x = 0;
 
+            
+
+            // Debugg
+            if (Debug_Mode)
+            {
+                Debug.WriteLine("Player at: " + Player_Cords_x + ", " + Player_Cords_y);
+            }
+
             // Select
 
-            if (input == ConsoleKey.Enter) Place_Marker(Player_Cords_x, Player_Cords_y, 'x');
+            if (input == ConsoleKey.Enter) Place_Marker(Player_Cords_x, Player_Cords_y, Player_Team);
         }
 
         #endregion
