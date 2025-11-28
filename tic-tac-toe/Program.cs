@@ -10,7 +10,7 @@ namespace tic_tac_toe
         static char Player_Team = 'x';
         
 
-        public static bool Debug_Mode = true;
+        public static bool Debug_Mode = false;
 
         static void Main(string[] args)
         {
@@ -47,7 +47,9 @@ namespace tic_tac_toe
 
         static void Switch_Player() 
         {
-            
+            if (Player_Team == 'x') Player_Team = 'o';
+            else if (Player_Team == 'o') Player_Team = 'x';
+           
         }
 
         static void Place_Marker(int x, int y, char team) 
@@ -82,6 +84,8 @@ namespace tic_tac_toe
                 }
                 Console.WriteLine();
             }
+
+            Console.WriteLine("Players turn: " + Player_Team);
         }
 
         static void Select_cell()
