@@ -17,13 +17,14 @@ namespace tic_tac_toe
             };
 
 
-        public static bool Debug_Mode = false;
+        public static bool Debug_Mode = true;
 
         static void Main()
         {
             Console.WriteLine("Tic Tac Toe Game Started");
             Thread.Sleep(1000);
             Console.Clear();
+            Menu_Main();
         }
 
         #region Game 
@@ -42,11 +43,11 @@ namespace tic_tac_toe
         }
 
 
-        static void Setup_Board(char[,] Board) 
+        static void Setup_Board(char[,] Board)
         {
-            for (int i = 0; i < Board.GetLength(0); i++) 
-            { 
-                for (int j = 0; j < Board.GetLength(1); j++) 
+            for (int i = 0; i < Board.GetLength(0); i++)
+            {
+                for (int j = 0; j < Board.GetLength(1); j++)
                 {
                     Board[i, j] = '#';
                 }
@@ -54,19 +55,19 @@ namespace tic_tac_toe
         }
 
 
-        static void Check_Win() 
+        static void Check_Win()
         {
-            
+
         }
 
-        static void Switch_Player() 
+        static void Switch_Player()
         {
             if (Player_Team == 'x') Player_Team = 'o';
             else if (Player_Team == 'o') Player_Team = 'x';
-           
+
         }
 
-        static void Place_Marker(int x, int y, char team) 
+        static void Place_Marker(int x, int y, char team)
         {
             if (Board[y, x] == '#')
             {
@@ -80,11 +81,11 @@ namespace tic_tac_toe
 
         #region UI Methods
 
-        static void Print_Board(char[,] Board) 
-        { 
-            for (int i = 0; i < Board.GetLength(0); i++) 
+        static void Print_Board(char[,] Board)
+        {
+            for (int i = 0; i < Board.GetLength(0); i++)
             {
-                for (int j = 0; j < Board.GetLength(1); j++) 
+                for (int j = 0; j < Board.GetLength(1); j++)
                 {
                     if (i == Player_Cords_y && j == Player_Cords_x)
                     {
@@ -112,12 +113,12 @@ namespace tic_tac_toe
             if (input == ConsoleKey.RightArrow) Player_Cords_x++;
 
             // Boundaries
-            if (Player_Cords_y < 0) Player_Cords_y = (Board.GetLength(0) -1);
-            if (Player_Cords_y > Board.GetLength(0) -1 ) Player_Cords_y = 0;
-            if (Player_Cords_x < 0) Player_Cords_x = Board.GetLength(1) -1 ;
+            if (Player_Cords_y < 0) Player_Cords_y = (Board.GetLength(0) - 1);
+            if (Player_Cords_y > Board.GetLength(0) - 1) Player_Cords_y = 0;
+            if (Player_Cords_x < 0) Player_Cords_x = Board.GetLength(1) - 1;
             if (Player_Cords_x > Board.GetLength(1) - 1) Player_Cords_x = 0;
 
-            
+
 
             // Debugg
             if (Debug_Mode)
@@ -130,16 +131,34 @@ namespace tic_tac_toe
             if (input == ConsoleKey.Enter) Place_Marker(Player_Cords_x, Player_Cords_y, Player_Team);
         }
 
-        static void menu() 
+        static void Menu_Main()
         {
-            // Menu buttons
-            ConsoleKey input = Console.ReadKey().Key;
-            if (input == ConsoleKey.UpArrow) Menu_Main_Position++;
-            if (input == ConsoleKey.DownArrow) Menu_Main_Position--;
+            while (true)
+            {
+                // Selector
+                for (int i = 0; i < Menu_Main_Options.Length; i++)
+                {
+                    if (i == Menu_Main_Position)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(Menu_Main_Options[i]);
+                        Console.ResetColor();
+                    }
+                    else Console.WriteLine(Menu_Main_Options[i]);
+                }
+                
+                // Menu buttons
+                ConsoleKey input = Console.ReadKey().Key;
+                if (input == ConsoleKey.UpArrow) Menu_Main_Position--;
+                if (input == ConsoleKey.DownArrow) Menu_Main_Position++;
+                if (input == ConsoleKey.Enter)
 
-            // Boundaries
-            if (Menu_Main_Position < 0) Menu_Main_Position = (Board.GetLength(0) - 1);
-            if (Menu_Main_Position > Board.GetLength(0) - 1) Menu_Main_Position = 0;
+                // Boundaries
+                if (Menu_Main_Position < 0) Menu_Main_Position = Menu_Main_Options.Length - 1;
+                if (Menu_Main_Position > Menu_Main_Options.Length - 1) Menu_Main_Position = 0;
+
+                Console.Clear();
+            }
         }
 
         #endregion
