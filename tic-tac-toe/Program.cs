@@ -4,17 +4,13 @@ namespace tic_tac_toe
 {
     internal class Program
     {
-        static char[,] Board = new char[3, 3];
+        readonly static int size= 0;
+        static char[,] Board = new char[size, size];
         static int Player_Cords_x = 0;
         static int Player_Cords_y = 0;
         static char Player_Team = 'x';
         static int Menu_Main_Position = 0;
-        static string[] Menu_Main_Options =
-            {
-                "Play",
-                "Setting",
-                "Quit"
-            };
+        readonly static string[] Menu_Main_Options ={ "Play", "Setting", "Quit" };
 
 
         public static bool Debug_Mode = true;
@@ -24,12 +20,13 @@ namespace tic_tac_toe
             Console.WriteLine("Tic Tac Toe Game Started");
             Thread.Sleep(1000);
             Console.Clear();
+            Play();
             Menu_Main();
         }
 
         #region Game 
 
-        static void play()
+        static void Play()
         {
             Setup_Board(Board);
             Print_Board(Board);
@@ -57,6 +54,10 @@ namespace tic_tac_toe
 
         static void Check_Win()
         {
+            // check win row
+            // check win colum 
+            // check win diagonal left --> right
+            // check win diagonal right --> left
 
         }
 
